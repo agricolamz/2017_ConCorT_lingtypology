@@ -1,0 +1,42 @@
+---
+title: "lingtypology"
+subtitle: "easy mapping for linguistic typology in R"
+author: "G. Moroz"
+date: "ConCorT (15–17 October 2017) <br> HSE Voronovo Learning Center"
+output:
+  xaringan::moon_reader:
+    css: ["default", "my_theme.css"]
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(message=FALSE,
+                      warning= FALSE,
+                      fig.width=10.4,
+                      fig.height=7)
+```
+
+class: inverse, center, middle
+
+# What `lingtypology` do?
+
+
+---
+
+---
+
+class: middle
+
+* Don't hesitate to write (<agricolamz@gmail.com>), or open (an issue)[https://github.com/ropensci/lingtypology/issues].
+
+* `lingtypology` tutorial: <https://ropensci.github.io/lingtypology/>
+
+* Slides on **GitHub**: <https://agricolamz.github.io/2017_ConCorT_lingtypology>
+
+
+* Slides created with the beautiful R package [**xaringan**](https://github.com/yihui/xaringan)
