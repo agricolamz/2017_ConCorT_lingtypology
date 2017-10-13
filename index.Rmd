@@ -1,5 +1,5 @@
 ---
-title: "lingtypology"
+title: "lingtypology:"
 subtitle: "easy mapping for linguistic typology in R"
 author: "G. Moroz"
 date: "ConCorT (15–17 October 2017) <br> HSE Voronovo Learning Center"
@@ -16,23 +16,349 @@ output:
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE)
 knitr::opts_chunk$set(message=FALSE,
-                      warning= FALSE,
                       fig.width=10.4,
-                      fig.height=7)
+                      fig.height=5)
 ```
 
 class: inverse, center, middle
 
-# What `lingtypology` do?
+# Why lingtypology?
 
 
 ---
+## Why lingtypology?
+
+* create a uniform access to the data across publications
+  * [Glottolog](http://glottolog.org/)
+  * [Cross-Linguistic Linked Data project](http://clld.org/)
+* easy map creation
+* multiple visualisations for typological features
+* API to typological databases
 
 ---
+class: inverse, center, middle
+# Installation
 
+---
+## Installation
+Install from CRAN (better):
+```{r, eval = FALSE}
+install.packages(lingtypology)
+```
+
+Install from GitHub:
+```{r, eval = FALSE}
+install.packages("devtools")
+devtools::install_github("ropensci/lingtypology")
+```
+
+Load package:
+```{r}
+library(lingtypology)
+```
+
+In this slides I use this virsion:
+```{r}
+packageVersion("lingtypology")
+```
+
+---
+class: inverse, center, middle
+# Glottolog functions
+
+---
+## Glottolog functions
+Functions structure: **what you need - what you have**
+
+---
+## Glottolog functions: by language
+```{r}
+aff.lang("Adyghe")
+area.lang(c("Basque", "Ewe", "Dyirbal", "Tobo"))
+gltc.lang(c("Au", "Bau", "Iau", "Lau"))
+iso.lang(c("Wan", "Han", "Dan"))
+```
+
+---
+## Glottolog functions: get languages
+```{r}
+lang.aff("Kartvelian")
+lang.iso(c("wan", "haa", "daf"))
+lang.gltc(c("auuu1241", "bauu1244", "iauu1242", "lauu1247"))
+```
+
+---
+## Glottolog functions: ISO 639-3 ↔ Glottocodes
+```{r}
+iso.gltc(c("auuu1241", "bauu1244", "iauu1242", "lauu1247"))
+gltc.iso(c("wan", "haa", "daf"))
+```
+
+--
+
+It is possible to use output of one function as an input for an other:
+```{r}
+gltc.lang(lang.aff("Circassian"))
+```
+
+---
+## Glottolog functions: Abbreviations
+```{r}
+lang.country("Cape Verde")
+lang.country("Cabo Verde")
+head(lang.country("USA"))
+```
+
+---
+## Glottolog functions: Spell Checker
+```{r}
+iso.gltc(c("auuu1241  ", " lau  u1247"))
+aff.lang(c("Adyge", "Katalan"))
+```
+
+---
+class: inverse, center, middle
+# Creating a map
+
+---
+## Map: base map
+
+```{r}
+map.feature("Estonian")
+```
+
+---
+## Map: multiple languages
+
+```{r}
+map.feature(lang.aff("Turkic"))
+```
+
+---
+## Built-in datasets
+
+```{r}
+head(ejective_and_n_consonants)
+head(circassian)
+```
+
+---
+## Color languages by the categorical variable
+```{r}
+map.feature(ejective_and_n_consonants$language,
+            features = ejective_and_n_consonants$ejectives)
+```
+
+---
+## Color languages by the numeric variable
+```{r}
+map.feature(ejective_and_n_consonants$language,
+            features = ejective_and_n_consonants$consonants)
+```
+
+---
+## Change colors
+```{r}
+map.feature(ejective_and_n_consonants$language,
+            features = ejective_and_n_consonants$ejectives,
+            color = c("yellow", "navy"))
+```
+
+---
+## Change colors
+```{r}
+map.feature(ejective_and_n_consonants$language,
+            features = ejective_and_n_consonants$consonants,
+            color = "magma")
+```
+
+---
+## Add labels
+```{r}
+map.feature(ejective_and_n_consonants$language,
+            features = ejective_and_n_consonants$ejectives,
+            label = ejective_and_n_consonants$language)
+```
+
+---
+## Add labels: permanent labels
+```{r}
+map.feature(ejective_and_n_consonants$language,
+            features = ejective_and_n_consonants$ejectives,
+            label = ejective_and_n_consonants$language,
+            label.hide = FALSE)
+```
+
+---
+## Add labels: emphasize
+```{r}
+map.feature(ejective_and_n_consonants$language,
+            features = ejective_and_n_consonants$ejectives,
+            label = ejective_and_n_consonants$language,
+            label.hide = FALSE,
+            label.emphasize = list(17:19, "red"))
+```
+
+---
+## Add minicharts: bar
+```{r}
+map.feature(ejective_and_n_consonants$language,
+            minichart.data = ejective_and_n_consonants[, 3:4],
+            minichart = "bar")
+```
+
+---
+## Add minicharts: pie
+```{r}
+map.feature(ejective_and_n_consonants$language,
+            minichart.data = ejective_and_n_consonants[, 3:4],
+            minichart = "pie")
+```
+
+---
+## Add minicharts: pie
+```{r}
+map.feature(ejective_and_n_consonants$language,
+            minichart.data = ejective_and_n_consonants[, 3:4],
+            minichart = "pie",
+            minichart.labels = TRUE)
+```
+
+---
+## Add your own coordinates
+```{r}
+map.feature(circassian$language, features = circassian$dialect,
+            latitude = circassian$latitude, 
+            longitude = circassian$longitude)
+```
+
+---
+## Add strokes
+```{r}
+map.feature(circassian$language, features = circassian$dialect,
+            latitude = circassian$latitude, 
+            longitude = circassian$longitude,
+            stroke.features = circassian$language)
+```
+
+---
+## Add rectangle
+```{r}
+map.feature(circassian$language, features = circassian$dialect,
+            latitude = circassian$latitude, 
+            longitude = circassian$longitude,
+            rectangle.lng = c(42.7, 45),
+            rectangle.lat = c(42.7, 44.3))
+```
+
+---
+## Add density estimation
+```{r}
+map.feature(circassian$language, features = circassian$dialect,
+            latitude = circassian$latitude, 
+            longitude = circassian$longitude,
+            density.estimation = circassian$language)
+```
+
+---
+## Add density estimation without dots
+```{r}
+map.feature(circassian$language, features = circassian$dialect,
+            latitude = circassian$latitude, 
+            longitude = circassian$longitude,
+            density.estimation = circassian$language,
+            density.points = FALSE)
+```
+
+---
+## Change tiles
+```{r}
+map.feature(ejective_and_n_consonants$language,
+            features = ejective_and_n_consonants$ejectives,
+            tile = "OpenStreetMap.BlackAndWhite")
+```
+
+---
+## Add minimaps
+```{r}
+map.feature(ejective_and_n_consonants$language,
+            features = ejective_and_n_consonants$ejectives,
+            minimap = TRUE)
+```
+
+---
+class: inverse, center, middle
+# Databases API
+
+---
+## Databases API
+
+* `wals.feature()` World Atlas of Language Structures
+* `autotyp.feature()` AUTOTYP
+* `phoible.feature()` PHOIBLE
+* `afbo.feature()`  Affix Borrowing database
+* `sails.feature()`  South American Indigenous Language Structures
+* `abvd.feature()` Austronesian Basic Vocabulary Database
+
+---
+## WALS
+
+```{r, eval=FALSE}
+df <- wals.feature("1a")
+head(df)
+```
+```{r, echo=FALSE, warning = FALSE}
+df <- wals.feature("1a")
+df <- df[,-4]
+head(df)
+```
+
+
+---
+## AUTOTYP
+
+```{r}
+df <- autotyp.feature(c('Numeral classifiers'))
+head(df)
+```
+
+---
+class: inverse, center, middle
+# About package development
+
+---
+## About package development
+
+.pull-left[
+* I've created
+  * 13 issues in [ropensci/lingtypology](https://github.com/ropensci/lingtypology)
+  * 4 issues in [clld/glottolog-data](https://github.com/clld/glottolog-data)
+  * 1 issue in [clld/glottolog](https://github.com/clld/glottolog)
+  * 1 issue in [clld/wals3](https://github.com/clld/wals3)
+  * 1 issue in [clld/sails](https://github.com/clld/sails)
+  * 1 issue in [rstudio/leaflet](https://github.com/rstudio/leaflet)
+  * 1 issue in [yihui/xaringan](https://github.com/yihui/xaringan)
+]
+
+--
+
+.pull-right[
+* I recieved some comments and suggestion from
+  * [Samira Verhees](https://github.com/sverhees)
+  * [Calle Börstell](https://github.com/borstell)
+  * [Robert Forkel](https://github.com/xrotwang)
+  * Natalia Levshina
+  * Timo Roettger
+* and from [rOpenSci](https://github.com/ropensci) peer review
+  * [Scott Chamberlain](https://github.com/sckott)
+  * [Kent Russell](https://github.com/timelyportfolio/)
+  * [Taras Tzakharko](https://github.com/tzakharko)
+  * [Languagespacelabs](https://github.com/languagespacelabs)
+]
+---
 class: middle
 
-* Don't hesitate to write (<agricolamz@gmail.com>), or open (an issue)[https://github.com/ropensci/lingtypology/issues].
+* Don't hesitate to write (<agricolamz@gmail.com>) or open [an issue](https://github.com/ropensci/lingtypology/issues).
 
 * `lingtypology` tutorial: <https://ropensci.github.io/lingtypology/>
 
