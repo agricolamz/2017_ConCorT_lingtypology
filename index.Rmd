@@ -331,7 +331,7 @@ class: inverse, center, middle
 
 .pull-left[
 * I've created
-  * 13 issues in [ropensci/lingtypology](https://github.com/ropensci/lingtypology)
+  * 15 issues in [ropensci/lingtypology](https://github.com/ropensci/lingtypology)
   * 4 issues in [clld/glottolog-data](https://github.com/clld/glottolog-data)
   * 1 issue in [clld/glottolog](https://github.com/clld/glottolog)
   * 1 issue in [clld/wals3](https://github.com/clld/wals3)
