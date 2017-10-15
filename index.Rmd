@@ -28,7 +28,7 @@ class: inverse, center, middle
 ---
 ## Why lingtypology?
 
-* create a uniform access to the data across publications
+* create uniform access to data across publications
   * [Glottolog](http://glottolog.org/)
   * [Cross-Linguistic Linked Data project](http://clld.org/)
 * easy map creation
@@ -57,7 +57,7 @@ Load package:
 library(lingtypology)
 ```
 
-In this slides I use this virsion:
+In this presentation I use the following version:
 ```{r}
 packageVersion("lingtypology")
 ```
@@ -68,7 +68,7 @@ class: inverse, center, middle
 
 ---
 ## Glottolog functions
-Functions structure: **what you need - what you have**
+Structure of functions: **what you need - what you have**
 
 ---
 ## Glottolog functions: by language
@@ -96,7 +96,7 @@ gltc.iso(c("wan", "haa", "daf"))
 
 --
 
-It is possible to use output of one function as an input for an other:
+It is possible to use the output of one function as the input for another:
 ```{r}
 gltc.lang(lang.aff("Circassian"))
 ```
@@ -143,14 +143,14 @@ head(circassian)
 ```
 
 ---
-## Color languages by the categorical variable
+## Color languages by a categorical variable
 ```{r}
 map.feature(ejective_and_n_consonants$language,
             features = ejective_and_n_consonants$ejectives)
 ```
 
 ---
-## Color languages by the numeric variable
+## Color languages by a numeric variable
 ```{r}
 map.feature(ejective_and_n_consonants$language,
             features = ejective_and_n_consonants$consonants)
@@ -242,7 +242,7 @@ map.feature(circassian$language, features = circassian$dialect,
 ```
 
 ---
-## Add rectangle
+## Add a rectangle
 ```{r}
 map.feature(circassian$language, features = circassian$dialect,
             latitude = circassian$latitude, 
@@ -252,7 +252,7 @@ map.feature(circassian$language, features = circassian$dialect,
 ```
 
 ---
-## Add density estimation
+## Add a density estimation
 ```{r}
 map.feature(circassian$language, features = circassian$dialect,
             latitude = circassian$latitude, 
@@ -261,7 +261,7 @@ map.feature(circassian$language, features = circassian$dialect,
 ```
 
 ---
-## Add density estimation without dots
+## Add a density estimation without dots
 ```{r}
 map.feature(circassian$language, features = circassian$dialect,
             latitude = circassian$latitude, 
@@ -343,7 +343,7 @@ class: inverse, center, middle
 --
 
 .pull-right[
-* I recieved some comments and suggestion from
+* I received some comments and suggestions from
   * [Samira Verhees](https://github.com/sverhees)
   * [Calle Börstell](https://github.com/borstell)
   * [Robert Forkel](https://github.com/xrotwang)
