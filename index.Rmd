@@ -1,7 +1,7 @@
 ---
 title: "lingtypology:"
-subtitle: "easy mapping for linguistic typology in R"
-author: "G. Moroz"
+subtitle: "easy mapping for linguistic typology in R <br>  goo.gl/Xi57pu"
+author: "G. Moroz <br> NRU HSE, Laboratory of the languages of the Caucasus"
 date: "ConCorT (15–17 October 2017) <br> HSE Voronovo Learning Center"
 output:
   xaringan::moon_reader:
