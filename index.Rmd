@@ -29,12 +29,14 @@ class: inverse, center, middle
 ## Why lingtypology?
 
 * create uniform access to data across publications
-  * [Glottolog](http://glottolog.org/)
+  * [Glottolog](http://glottolog.org/) (Hammarström, Forkel, Haspelmath 2017)
   * [Cross-Linguistic Linked Data project](http://clld.org/)
 * easy map creation
 * multiple visualisations for typological features
 * API to typological databases
 
+
+`lingtypology` is based on the `leaflet` (Cheng et al. 2017) and `leaflet.minicharts` (Guillem 2017) R packages.
 ---
 class: inverse, center, middle
 # Installation
@@ -48,7 +50,7 @@ install.packages(lingtypology)
 
 Install from GitHub:
 ```{r, eval = FALSE}
-install.packages("devtools")
+install.packages("devtools", dependencies = TRUE)
 devtools::install_github("ropensci/lingtypology")
 ```
 
@@ -301,21 +303,15 @@ class: inverse, center, middle
 * `abvd.feature()` Austronesian Basic Vocabulary Database
 
 ---
-## WALS
+## WALS (Dryer, Haspelmath 2013)
 
-```{r, eval=FALSE}
+```{r}
 df <- wals.feature("1a")
 head(df)
 ```
-```{r, echo=FALSE, warning = FALSE}
-df <- wals.feature("1a")
-df <- df[,-4]
-head(df)
-```
-
 
 ---
-## AUTOTYP
+## AUTOTYP (Bickel et. al. 2017)
 
 ```{r}
 df <- autotyp.feature(c('Numeral classifiers'))
